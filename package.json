@@ -1,0 +1,16 @@
+{
+  "name": "ai-trip-planner",
+  "private": true,
+  "description": "Run Flask API and Next.js UI together",
+  "scripts": {
+    "dev": "concurrently -k -n api,web -c blue,magenta \"npm run dev:api\" \"npm run dev:web\"",
+    "dev:api": "cd backend && python3 app.py",
+    "dev:web": "cd frontend && npm run dev -- -p 3000",
+    "setup": "npm run setup:web && npm run setup:api",
+    "setup:web": "cd frontend && npm install",
+    "setup:api": "cd backend && python3 -m pip install -r requirements.txt"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2"
+  }
+}

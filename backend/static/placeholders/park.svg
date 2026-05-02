@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600">
+  <rect width="800" height="600" fill="#2d5a3d"/>
+  <ellipse cx="200" cy="420" rx="120" ry="40" fill="#1a3d28" opacity="0.5"/>
+  <ellipse cx="550" cy="400" rx="160" ry="50" fill="#1a3d28" opacity="0.45"/>
+  <circle cx="250" cy="280" r="70" fill="#3d8b4a"/>
+  <circle cx="520" cy="240" r="90" fill="#2f7a42"/>
+  <text x="400" y="560" text-anchor="middle" fill="#c8e6c9" font-family="system-ui,sans-serif" font-size="22">Park</text>
+</svg>

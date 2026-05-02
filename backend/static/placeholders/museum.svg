@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600">
+  <rect width="800" height="600" fill="#3d3a4f"/>
+  <rect x="180" y="220" width="440" height="280" fill="#6b6478" stroke="#9a92a8" stroke-width="4"/>
+  <path fill="#8b7355" d="M120 500 L680 500 L640 220 L160 220 Z"/>
+  <rect x="360" y="320" width="80" height="180" fill="#2a2833"/>
+  <text x="400" y="560" text-anchor="middle" fill="#d4d0dc" font-family="system-ui,sans-serif" font-size="22">Museum</text>
+</svg>

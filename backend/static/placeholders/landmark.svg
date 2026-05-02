@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600">
+  <defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1e3a5f"/><stop offset="1" stop-color="#3d6a99"/></linearGradient></defs>
+  <rect width="800" height="600" fill="url(#g)"/>
+  <path fill="#c9a227" d="M400 120 L480 520 L320 520 Z"/>
+  <circle cx="400" cy="200" r="48" fill="#f4e4bc" opacity="0.9"/>
+  <text x="400" y="560" text-anchor="middle" fill="#e8eef5" font-family="system-ui,sans-serif" font-size="22">Landmark</text>
+</svg>

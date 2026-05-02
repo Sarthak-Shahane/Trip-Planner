@@ -122,5 +122,21 @@
   }
   body {
     @apply bg-background text-foreground;
+    background-attachment: fixed;
+  }
+
+  ::selection {
+    background: color-mix(in oklab, oklch(0.7 0.13 240) 30%, white);
+    color: oklch(0.2 0.03 265);
+  }
+}
+
+@layer utilities {
+  .soft-card {
+    @apply border-white/50 bg-white/70 backdrop-blur shadow-md;
+  }
+
+  .interactive-lift {
+    @apply transition-all duration-300 hover:-translate-y-1 hover:shadow-xl;
   }
 }

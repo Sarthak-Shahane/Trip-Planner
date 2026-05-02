@@ -1,93 +1,77 @@
-# Trip Planner
+# AI Trip Planner
 
-AI-powered trip planner that generates travel itineraries with places to visit, restaurants, hotels, and a day-by-day plan. Built with a Flask backend (LangGraph agents) and a Next.js frontend.
-
-## Features
-
-- **Natural language input** — Describe your trip (destination, duration, preferences) in plain text
-- **Multi-agent workflow** — Extraction → Places → Restaurants → Hotels → Itinerary (LangGraph)
-- **Rich output** — Places to visit, restaurant suggestions, hotel options, daily itinerary, and budget breakdown
-
-## Project structure
-
-```
-trip_planner_yt/
-├── backend/          # Flask API + LangGraph workflow
-│   ├── agents/       # Extraction, Place, Restaurants, Hotels, Itinerary agents
-│   ├── app.py        # API entrypoint
-│   └── workflow.py   # Travel plan workflow
-└── frontend/         # Next.js app (React, Tailwind, shadcn)
-```
+Trip planner with a **Flask** backend (local SQLite catalog, no external APIs) and a **Next.js** frontend. Describe a trip in plain text and get places, restaurants, hotels, a day-by-day itinerary, and a budget breakdown.
 
 ## Prerequisites
 
-- Python 3.10+
-- Node.js 18+
-- API keys (see Environment below)
+- **Python 3.10+** (with `python3` on your PATH, or adjust root `package.json` `dev:api` to use `python` on Windows)
+- **Node.js 18+**
 
-## Setup
+## Quick start (one command)
 
-### Backend
+From the **repository root**:
+
+```bash
+npm install
+npm run setup
+npm run dev
+```
+
+This starts:
+
+- **API + static files:** [http://127.0.0.1:5000](http://127.0.0.1:5000) — try [http://127.0.0.1:5000/api/health](http://127.0.0.1:5000/api/health)
+- **Website:** [http://localhost:3000](http://localhost:3000)
+
+Open the site, enter something like **“5 days in Paris, budget 2500”**, and submit.
+
+### Manual start (two terminals)
+
+**Terminal 1 — backend**
 
 ```bash
 cd backend
-python -m venv venv
-source venv/bin/activate   # Windows: venv\Scripts\activate
-pip install -r requirements.txt
+python3 -m pip install -r requirements.txt
+python3 app.py
 ```
 
-Create `backend/.env` with your API keys (see [Environment](#environment)).
-
-### Frontend
+**Terminal 2 — frontend**
 
 ```bash
 cd frontend
 npm install
+npm run dev
 ```
 
-## Environment
+Then open [http://localhost:3000](http://localhost:3000).
 
-In `backend/.env` (never commit this file):
+## Configuration (optional)
 
-| Variable | Required | Description |
-|----------|----------|-------------|
-| `AZURE_OPENAI_API_KEY` | Yes | Azure OpenAI API key |
-| `AZURE_OPENAI_ENDPOINT` | Yes | Azure OpenAI endpoint URL |
-| `AZURE_OPENAI_DEPLOYMENT_NAME` | Yes | Model deployment name (e.g. gpt-4.1-mini) |
-| `AZURE_OPENAI_API_VERSION` | Yes | API version (e.g. 2025-01-01-preview) |
-| `TAVILY_API_KEY` | Yes | [Tavily](https://tavily.com) API key for web search |
-| `PEXELS_API_KEY` | Yes | [Pexels](https://www.pexels.com/api/) API key for images |
-| `GOOGLE_API_KEY` | Optional | Google APIs (search / places) if used |
-| `GOOGLE_SEARCH_ENGINE_ID` | Optional | Custom Search Engine ID |
-| `GOOGLE_PLACES_API_KEY` | Optional | Google Places API key |
+| File | Purpose |
+|------|---------|
+| `frontend/.env.local` | Copy from `frontend/.env.example`. Set `NEXT_PUBLIC_API_URL` if the API is not at `http://127.0.0.1:5000`. |
+| `backend/.env` | Copy from `backend/.env.example`. Set `TRIP_PLANNER_PUBLIC_URL` to the same base URL as the API so image links in JSON match where the browser loads assets. |
 
-Copy from `.env.example` if present, or create `.env` with the variables above.
+If you omit these, defaults assume the API runs at `http://127.0.0.1:5000`.
 
-## Run locally
+## Project layout
 
-1. **Start the backend** (from `backend/` with venv active):
-
-   ```bash
-   python app.py
-   ```
-
-   API runs at `http://localhost:5000`.
-
-2. **Start the frontend** (from `frontend/`):
-
-   ```bash
-   npm run dev
-   ```
-
-   App runs at `http://localhost:3000`.
-
-3. Open `http://localhost:3000`, enter a trip description (e.g. “3 days in Paris, budget-friendly”), and generate your plan.
+```
+├── backend/           # Flask app, SQLite data, /static placeholders
+│   ├── app.py
+│   ├── workflow.py
+│   ├── trip_database.py
+│   └── static/
+├── frontend/          # Next.js UI
+│   ├── app/page.tsx
+│   └── lib/api.ts     # API base URL
+└── package.json       # `npm run dev` runs both servers
+```
 
 ## API
 
-- **POST** `/api/plan_travel`  
-  - Body: `{ "user_input": "your trip description" }`  
-  - Returns: travel plan with `travel_details`, `places`, `restaurants`, `hotels`, `itinerary`, `budget_breakdown`.
+- **GET** `/api/health` — readiness check  
+- **POST** `/api/plan_travel` — body: `{ "user_input": "your trip description" }`  
+- **GET** `/static/...` — placeholder images used in plan responses  
 
 ## License
 
